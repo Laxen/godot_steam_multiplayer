@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnrdio4fgate1"]
+
+[ext_resource type="PackedScene" uid="uid://kha26nkw1ohf" path="res://steamcontrol.tscn" id="1_rnpgg"]
+
+[node name="Main" type="Node2D"]
+
+[node name="SteamControl" parent="." instance=ExtResource("1_rnpgg")]
