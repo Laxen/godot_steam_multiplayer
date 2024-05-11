@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsr11gis8s3ha"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_mlapv"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xjg5r"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_mlapv")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.0705882, 1, 1, 1)
+polygon = PackedVector2Array(-41, -45, 39, -46, 40, 45, -42, 46)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xjg5r")
