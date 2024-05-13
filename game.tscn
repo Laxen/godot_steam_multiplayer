@@ -11,3 +11,6 @@ player_scene = ExtResource("2_jswtf")
 polygon = PackedVector2Array(-46, -54, 83, -48, 93, 59, -68, 90)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")

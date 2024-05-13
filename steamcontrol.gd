@@ -15,17 +15,6 @@ func start_game():
 	get_tree().root.add_child(scene)
 	self.hide()
 
-@rpc("any_peer")
-func send_player_information(name, id):
-	GameManager.players[id] = {
-		"name": name,
-		"id": id
-	}
-	
-	if multiplayer.is_server():
-		for i in GameManager.players:
-			send_player_information.rpc(GameManager.players[i].name, i)
-
 func _process(delta):
 	Steam.run_callbacks()
 
@@ -33,7 +22,6 @@ func _on_host_pressed():
 	peer.lobby_created.connect(_on_lobby_created)
 	peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC)
 	multiplayer.multiplayer_peer = peer
-	send_player_information(multiplayer.get_unique_id(), multiplayer.get_unique_id())
 
 func _on_lobby_created(connect, id):
 	if not connect:
@@ -42,6 +30,8 @@ func _on_lobby_created(connect, id):
 	Steam.setLobbyData(id, "name", str("SteamMultiplayer Lobby of Lax"))
 	Steam.setLobbyJoinable(id, true)
 	print("Lobby ", id, " created")
+	
+	start_game()
 
 func _on_join_pressed():
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
@@ -49,7 +39,7 @@ func _on_join_pressed():
 	Steam.requestLobbyList()
 
 func connected_to_server():
-	send_player_information.rpc_id(1, multiplayer.get_unique_id(), multiplayer.get_unique_id())
+	print("connected")
 
 func _on_lobby_match_list(lobbies):
 	for lobby in lobbies:
@@ -58,9 +48,7 @@ func _on_lobby_match_list(lobbies):
 			peer.connect_lobby(lobby)
 			multiplayer.multiplayer_peer = peer
 			print("Joined lobby ", lobby)
+			start_game()
 			return
 			
 	print("ERROR: Couldn't find lobby")
-
-func _on_start_pressed():
-	start_game.rpc()
