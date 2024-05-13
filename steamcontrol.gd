@@ -9,7 +9,6 @@ func _ready():
 	
 	multiplayer.connected_to_server.connect(connected_to_server)
 
-@rpc("any_peer", "call_local")
 func start_game():
 	var scene = load("res://game.tscn").instantiate()
 	get_tree().root.add_child(scene)
@@ -39,6 +38,7 @@ func _on_join_pressed():
 	Steam.requestLobbyList()
 
 func connected_to_server():
+	start_game()
 	print("connected")
 
 func _on_lobby_match_list(lobbies):
@@ -47,8 +47,7 @@ func _on_lobby_match_list(lobbies):
 		if lobby_name == "SteamMultiplayer Lobby of Lax":
 			peer.connect_lobby(lobby)
 			multiplayer.multiplayer_peer = peer
-			print("Joined lobby ", lobby)
-			start_game()
+			print("Joining lobby ", lobby, "...")
 			return
 			
 	print("ERROR: Couldn't find lobby")

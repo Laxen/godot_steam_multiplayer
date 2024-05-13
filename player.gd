@@ -1,10 +1,8 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-#@onready var cam = $Camera2D
 
-func _ready():
-	#cam.enabled = is_multiplayer_authority()
+func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 func _physics_process(delta):
