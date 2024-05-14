@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://kha26nkw1ohf"]
+[gd_scene load_steps=3 format=3 uid="uid://kha26nkw1ohf"]
 
 [ext_resource type="Script" path="res://steamcontrol.gd" id="1_u4ald"]
+[ext_resource type="PackedScene" uid="uid://brdmddjoab53c" path="res://game.tscn" id="2_ksh5s"]
 
 [node name="SteamControl" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_u4ald")
+game_scene = ExtResource("2_ksh5s")
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
@@ -20,13 +22,5 @@ offset_right = 225.0
 offset_bottom = 170.0
 text = "Join"
 
-[node name="Start" type="Button" parent="."]
-layout_mode = 0
-offset_top = 170.0
-offset_right = 225.0
-offset_bottom = 255.0
-text = "Start"
-
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

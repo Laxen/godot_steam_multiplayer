@@ -1,5 +1,7 @@
 extends Control
 
+@export var game_scene : PackedScene
+
 var peer = SteamMultiplayerPeer.new()
 
 func _ready():
@@ -10,7 +12,7 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 
 func start_game():
-	var scene = load("res://game.tscn").instantiate()
+	var scene = game_scene.instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
 
