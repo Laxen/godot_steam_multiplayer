@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1smirl8ne272"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_bhc77"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xtw21"]
+radius = 15.0333
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4nny8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Bullet" type="Area2D"]
+top_level = true
+script = ExtResource("1_bhc77")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xtw21")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(0.435897, 0.446154)
+color = Color(0.871522, 0, 0.485906, 1)
+polygon = PackedVector2Array(-26, -21, -1, -33, 26, -23, 32, 3, 17, 26, -3, 32, -24, 25, -85, -1)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4nny8")
